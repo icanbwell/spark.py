@@ -45,9 +45,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: build docker java 15 images
+      - name: setup buildx
         run: |
           docker buildx create --use
+      - name: build docker java 15 images
+        run: |
           ls -halt $SPARK_HOME
           ls -halt $SPARK_HOME/kubernetes/dockerfiles/spark/bindings/python
           $SPARK_HOME/bin/docker-image-tool.sh -r imranq2 -t java15-${{ steps.previoustag.outputs.tag }} -X -f $SPARK_HOME/kubernetes/dockerfiles/spark/Dockerfile -p $SPARK_HOME/kubernetes/dockerfiles/spark/bindings/python/Dockerfile -b java_image_tag=15-slim build
