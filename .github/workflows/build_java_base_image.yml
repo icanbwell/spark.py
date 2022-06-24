@@ -31,7 +31,7 @@ jobs:
       - uses: vemonet/setup-spark@v1
         with:
           spark-version: '3.3.0' # Exact version
-          hadoop-version: '3.2'
+          hadoop-version: '3'
       - run: spark-submit --version
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
