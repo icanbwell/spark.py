@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2.2.0
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required due to the way Git works, without it this action won't be able to find any or the correct tags
       - name: 'Get Previous tag'
@@ -60,7 +60,7 @@ jobs:
       - name: build docker java 15 images
         run: |
           $SPARK_HOME/bin/docker-image-tool.sh -r imranq2 -t java15-${{ steps.previoustag.outputs.tag }} -X -f $SPARK_HOME/kubernetes/dockerfiles/spark/Dockerfile -p $SPARK_HOME/kubernetes/dockerfiles/spark/bindings/python/Dockerfile -b java_image_tag=15-slim build
-#          docker tag imranq2/spark-py:java15-${{ steps.previoustag.outputs.tag }} imranq2/spark-py:java15-latest
+          docker tag imranq2/spark-py:java15-${{ steps.previoustag.outputs.tag }} imranq2/spark-py:java15-latest
       - name: build docker java 17 images
         run: |
           curl https://raw.githubusercontent.com/apache/spark/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/Dockerfile.java17 --output $SPARK_HOME/kubernetes/dockerfiles/spark/Dockerfile.java17
