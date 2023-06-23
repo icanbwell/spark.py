@@ -33,6 +33,7 @@ jobs:
         with:
           spark-version: '3.3.0' # Exact version
           hadoop-version: '3'
+          py4j-version: '0.8'
       - run: spark-submit --version
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
