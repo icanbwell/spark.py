@@ -32,7 +32,7 @@ jobs:
       - uses: vemonet/setup-spark@v1
         with:
           spark-version: '3.3.0' # Exact version
-          hadoop-version: '3'        
+          hadoop-version: '3'
       - run: spark-submit --version
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -66,6 +66,5 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/apache/spark/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/Dockerfile --output $SPARK_HOME/kubernetes/dockerfiles/spark/Dockerfile
           ls -halt $SPARK_HOME/kubernetes/dockerfiles/spark
-          $SPARK_HOME/bin/docker-image-tool.sh -r imranq2 -t java17-${{ steps.previoustag.outputs.tag }} -X -f $SPARK_HOME/kubernetes/dockerfiles/spark/Dockerfile -p $SPARK_HOME/kubernetes/dockerfiles/spark/bindings/python/Dockerfile -b java_image_tag=17-jre-jammy build
+          $SPARK_HOME/bin/docker-image-tool.sh -r imranq2 -t java17-${{ steps.previoustag.outputs.tag }} -X -f $SPARK_HOME/kubernetes/dockerfiles/spark/Dockerfile -p $SPARK_HOME/kubernetes/dockerfiles/spark/bindings/python/Dockerfile -b java_image_tag=17-jre-latest build
           docker tag imranq2/spark-py:java17-${{ steps.previoustag.outputs.tag }} imranq2/spark-py:java17-latest
-
